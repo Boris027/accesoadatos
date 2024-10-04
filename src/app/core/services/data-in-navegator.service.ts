@@ -38,8 +38,10 @@ export class DataInNavegatorService<T extends model>extends DataService<T> {
      }
 
      setarrayusers(array:T[]){
+        let date=new Date()
+        date.setDate(date.getDate()+1) //la cookie durará 1 dia
         let poner=JSON.stringify(array)
-        this.cookie.set("arrayusers",poner)
+        this.cookie.set("arrayusers",poner,{expires:date})
      }
 
 
