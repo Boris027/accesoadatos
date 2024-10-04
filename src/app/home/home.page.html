@@ -1,20 +1,56 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header [translucent]="true" >
+  <ion-toolbar class="ion-align-items-center">
+    
+    <ion-item>
+      <ion-title class="ion-margin-top">
+        Blank
+      </ion-title>
+      
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true" >
+  
+  
+
+  <ion-toolbar id="formulario" style="margin-top: 20px;">
+    <form  #formulario="ngForm">
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input  name="inputnombre" id="inputnombre" required #nameInput></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Apellidos</ion-label>
+        <ion-input name="inputapellido" id="inputapellido" required #surnameInput></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Edad</ion-label>
+        <ion-input  name="inputedad" id="inputedad" type="number" required #ageInput></ion-input>
+      </ion-item>
+  
+      <ion-button expand="full" (click)="submit(nameInput, surnameInput, ageInput)">
+        Añadir tarjeta
+      </ion-button>
+    </form>
+  </ion-toolbar>
+
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let person of (peopleservice.requestAll() | async)">
+        <app-personal-card  [name]="person.name" [surname]="person.surname" [age]="person.age" (emitir)="recibirmensaje($event,person.id!!)"></app-personal-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+
 </ion-content>
+
+
+
+
+
